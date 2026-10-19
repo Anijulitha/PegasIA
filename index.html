@@ -6,18 +6,23 @@
     <title>PegasIA Legal - Generador</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans text-gray-800 min-h-screen flex flex-col">
+<!-- Fondo morado muy clarito para toda la web -->
+<body class="bg-purple-50 font-sans text-gray-800 min-h-screen flex flex-col">
 
     <!-- PANTALLA DE LOGIN -->
     <div id="pantalla-login" class="flex-1 flex items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm border-t-4 border-gray-800">
-            <h2 class="text-2xl font-bold mb-6 text-center">Acceso PegasIA</h2>
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm border-t-4 border-purple-400">
+            <!-- HUECO PARA EL LOGO EN EL LOGIN -->
+            <div class="flex justify-center mb-4">
+                <img src="logo.png" alt="Logo PegasIA" class="h-16 object-contain" id="logo-login-placeholder">
+            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center text-purple-900">Acceso PegasIA</h2>
             <form id="formulario-login" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium mb-1">Correo electrónico</label>
-                    <input type="email" id="login_email" placeholder="ana@pegasia.es" class="w-full border p-2 rounded focus:ring-gray-800 focus:border-gray-800" required>
+                    <label class="block text-sm font-medium mb-1 text-purple-800">Correo electrónico</label>
+                    <input type="email" id="login_email" placeholder="ana@pegasia.es" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
                 </div>
-                <button type="submit" id="btn-login" class="w-full bg-gray-800 text-white font-bold py-2 px-4 rounded hover:bg-black transition">
+                <button type="submit" id="btn-login" class="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition shadow-md">
                     Entrar al Despacho
                 </button>
             </form>
@@ -27,18 +32,22 @@
     <!-- PANTALLA PRINCIPAL (Oculta por defecto) -->
     <div id="pantalla-app" class="hidden max-w-3xl mx-auto w-full py-8">
         <div class="flex justify-between items-end mb-6">
-            <div>
-                <h1 class="text-2xl font-bold">Generador de Contratos</h1>
-                <p id="nombre-despacho" class="text-blue-600 font-semibold"></p>
+            <div class="flex items-center gap-4">
+                <!-- HUECO PARA EL LOGO EN LA APP -->
+                <img src="logo.png" alt="Logo PegasIA" class="h-12 object-contain" id="logo-app-placeholder">
+                <div>
+                    <h1 class="text-2xl font-bold text-purple-900">Generador de Contratos</h1>
+                    <p id="nombre-despacho" class="text-purple-600 font-semibold"></p>
+                </div>
             </div>
-            <button onclick="cerrarSesion()" class="text-sm text-red-600 hover:underline font-medium">Cerrar sesión</button>
+            <button onclick="cerrarSesion()" class="text-sm text-red-500 hover:text-red-700 hover:underline font-medium transition">Cerrar sesión</button>
         </div>
 
-        <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-blue-600">
+        <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-purple-500">
             <!-- SELECTOR DE DOCUMENTO -->
-            <div class="mb-6 pb-6 border-b">
-                <label class="block text-sm font-bold text-gray-700 mb-2">Selecciona la plantilla a generar:</label>
-                <select id="tipo_documento" class="w-full border p-3 rounded-md bg-gray-50 focus:ring-blue-500 font-medium" onchange="cambiarFormulario()">
+            <div class="mb-6 pb-6 border-b border-purple-100">
+                <label class="block text-sm font-bold text-purple-800 mb-2">Selecciona la plantilla a generar:</label>
+                <select id="tipo_documento" class="w-full border border-purple-200 p-3 rounded-md bg-purple-50 focus:ring-purple-500 focus:border-purple-500 font-medium text-purple-900 transition" onchange="cambiarFormulario()">
                     <option value="arrendamiento">Contrato de Arrendamiento</option>
                     <option value="nda">Acuerdo de Confidencialidad (NDA)</option>
                 </select>
@@ -48,74 +57,74 @@
                 <!-- DATOS COMUNES -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium mb-1">Ciudad</label>
-                        <input type="text" id="ciudad" value="Mairena del Alcor" class="w-full border p-2 rounded" required>
+                        <label class="block text-sm font-medium mb-1 text-gray-700">Ciudad</label>
+                        <input type="text" id="ciudad" value="Mairena del Alcor" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-1">Fecha Larga</label>
-                        <input type="text" id="fecha" value="15 de octubre de 2026" class="w-full border p-2 rounded" required>
+                        <label class="block text-sm font-medium mb-1 text-gray-700">Fecha Larga</label>
+                        <input type="text" id="fecha" value="15 de octubre de 2026" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
                     </div>
                 </div>
 
                 <!-- BLOQUE 1: CAMPOS DE ARRENDAMIENTO -->
                 <div id="bloque_arrendamiento" class="space-y-6">
-                    <div class="bg-blue-50 p-4 rounded-md border border-blue-100">
-                        <h3 class="font-semibold text-blue-800 mb-3">Datos del Arrendador</h3>
+                    <div class="bg-purple-50 p-4 rounded-md border border-purple-100">
+                        <h3 class="font-semibold text-purple-800 mb-3">Datos del Arrendador</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm mb-1">Nombre completo</label>
-                                <input type="text" id="arr_nombre" class="w-full border p-2 rounded">
+                                <label class="block text-sm mb-1 text-gray-700">Nombre completo</label>
+                                <input type="text" id="arr_nombre" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                             </div>
                             <div>
-                                <label class="block text-sm mb-1">DNI / NIF</label>
-                                <input type="text" id="arr_dni" class="w-full border p-2 rounded">
+                                <label class="block text-sm mb-1 text-gray-700">DNI / NIF</label>
+                                <input type="text" id="arr_dni" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                             </div>
                         </div>
                     </div>
 
-                    <div class="border-t border-b py-4">
+                    <div class="border-t border-b border-purple-100 py-4">
                         <label class="flex items-center space-x-3 cursor-pointer">
-                            <input type="checkbox" id="hay_fiador" class="form-checkbox h-5 w-5 text-blue-600" onchange="toggleFiador()">
-                            <span class="font-medium">¿Incluir fiador solidario en el contrato?</span>
+                            <input type="checkbox" id="hay_fiador" class="form-checkbox h-5 w-5 text-purple-600 focus:ring-purple-500" onchange="toggleFiador()">
+                            <span class="font-medium text-gray-700">¿Incluir fiador solidario en el contrato?</span>
                         </label>
-                        <div id="seccion_fiador" class="hidden mt-4 bg-gray-50 p-4 rounded-md border border-gray-200">
+                        <div id="seccion_fiador" class="hidden mt-4 bg-white p-4 rounded-md border border-purple-200 shadow-sm">
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-sm mb-1">Nombre completo Fiador</label>
-                                    <input type="text" id="fia_nombre" class="w-full border p-2 rounded">
+                                    <label class="block text-sm mb-1 text-gray-700">Nombre completo Fiador</label>
+                                    <input type="text" id="fia_nombre" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                                 </div>
                                 <div>
-                                    <label class="block text-sm mb-1">DNI / NIF Fiador</label>
-                                    <input type="text" id="fia_dni" class="w-full border p-2 rounded">
+                                    <label class="block text-sm mb-1 text-gray-700">DNI / NIF Fiador</label>
+                                    <input type="text" id="fia_dni" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium mb-1">Anexos (separados por comas)</label>
-                        <input type="text" id="anexos" class="w-full border p-2 rounded">
+                        <label class="block text-sm font-medium mb-1 text-gray-700">Anexos (separados por comas)</label>
+                        <input type="text" id="anexos" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                     </div>
                 </div>
 
                 <!-- BLOQUE 2: CAMPOS DE NDA -->
                 <div id="bloque_nda" class="space-y-6 hidden">
-                    <div class="bg-purple-50 p-4 rounded-md border border-purple-100">
+                    <div class="bg-purple-50 p-4 rounded-md border border-purple-200 shadow-sm">
                         <h3 class="font-semibold text-purple-800 mb-3">Partes Involucradas</h3>
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm mb-1">Empresa Emisora</label>
-                                <input type="text" id="nda_emisora" value="I.ATLAS" class="w-full border p-2 rounded">
+                                <label class="block text-sm mb-1 text-gray-700">Empresa Emisora</label>
+                                <input type="text" id="nda_emisora" value="I.ATLAS" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                             </div>
                             <div>
-                                <label class="block text-sm mb-1">Empresa Receptora</label>
-                                <input type="text" id="nda_receptora" class="w-full border p-2 rounded">
+                                <label class="block text-sm mb-1 text-gray-700">Empresa Receptora</label>
+                                <input type="text" id="nda_receptora" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                             </div>
                         </div>
                         <div>
-                            <label class="block text-sm mb-1">Propósito del acuerdo</label>
+                            <label class="block text-sm mb-1 text-gray-700">Propósito del acuerdo</label>
                             <div class="flex gap-2">
-                                <input type="text" id="nda_proposito" placeholder="Ej: Evaluar una posible fusión con Microsoft" class="w-full border p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                <input type="text" id="nda_proposito" placeholder="Ej: Evaluar una posible fusión con Microsoft" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                                 <button type="button" onclick="mejorarConIA(event)" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition flex-shrink-0 font-bold text-sm shadow-sm flex items-center gap-1">
                                     ✨ Mejorar con IA
                                 </button>
@@ -124,29 +133,29 @@
                     </div> 
                 </div> 
 
-                <button type="submit" id="btn-generar" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded hover:bg-blue-700 transition">
+                <button type="submit" id="btn-generar" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded hover:bg-purple-700 transition shadow-md">
                     Generar Documento Word
                 </button>
                 <p id="mensaje-estado" class="text-sm text-center mt-2 text-green-600 font-semibold hidden">¡Documento generado con éxito!</p>
             </form>
 
             <!-- SECCIÓN DE HISTORIAL -->
-            <div class="mt-12 border-t pt-8">
+            <div class="mt-12 border-t border-purple-100 pt-8">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold">Historial del Despacho</h2>
+                    <h2 class="text-xl font-bold text-purple-900">Historial del Despacho</h2>
                 </div>
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto rounded-lg border border-purple-100">
                     <table class="w-full text-left text-sm">
-                        <thead class="bg-gray-100 text-gray-600">
+                        <thead class="bg-purple-50 text-purple-800">
                             <tr>
-                                <th class="p-3">ID</th>
-                                <th class="p-3">Cliente / Entidad</th>
-                                <th class="p-3">Tipo</th>
-                                <th class="p-3">Fecha</th>
-                                <th class="p-3 text-right">Acciones</th>
+                                <th class="p-3 font-semibold">ID</th>
+                                <th class="p-3 font-semibold">Cliente / Entidad</th>
+                                <th class="p-3 font-semibold">Tipo</th>
+                                <th class="p-3 font-semibold">Fecha</th>
+                                <th class="p-3 font-semibold text-right">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="tabla-historial" class="divide-y text-gray-700"></tbody>
+                        <tbody id="tabla-historial" class="divide-y divide-purple-100 text-gray-700 bg-white"></tbody>
                     </table>
                 </div>
             </div>
@@ -308,16 +317,16 @@
                 tbody.innerHTML = ''; 
                 documentos.forEach(doc => {
                     const fila = document.createElement('tr');
-                    fila.className = "hover:bg-gray-50 border-b";
+                    fila.className = "hover:bg-purple-50 transition border-b border-purple-50";
                     
                     // Modificamos el botón de descarga para enviar el header mediante fetch
                     fila.innerHTML = `
-                        <td class="p-3 font-mono text-xs text-gray-500">#${doc.id}</td>
-                        <td class="p-3 font-medium">${doc.cliente}</td>
-                        <td class="p-3 font-semibold ${doc.tipo.includes('NDA') ? 'text-purple-600' : 'text-blue-600'}">${doc.tipo}</td>
+                        <td class="p-3 font-mono text-xs text-purple-400">#${doc.id}</td>
+                        <td class="p-3 font-medium text-gray-800">${doc.cliente}</td>
+                        <td class="p-3 font-semibold text-purple-700">${doc.tipo}</td>
                         <td class="p-3 text-gray-500">${doc.fecha}</td>
                         <td class="p-3 text-right">
-                            <button onclick="descargarDocumento(${doc.id})" class="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-800 transition">
+                            <button onclick="descargarDocumento(${doc.id})" class="inline-flex items-center gap-1 text-sm font-semibold text-purple-600 hover:text-purple-800 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
