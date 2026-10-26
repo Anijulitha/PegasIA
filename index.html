@@ -1,53 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PegasIA Legal - Generador</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<!-- Fondo morado muy clarito para toda la web -->
-<body class="bg-purple-50 font-sans text-gray-800 min-h-screen flex flex-col">
+<!-- Fondo #d1c1ff para toda la web -->
+
+<!-- Fondo general limpio y profesional -->
+
+<body class="bg-slate-50 font-sans text-slate-800 min-h-screen flex flex-col">
 
     <!-- PANTALLA DE LOGIN -->
-    <div id="pantalla-login" class="flex-1 flex items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm border-t-4 border-purple-400">
-            <!-- HUECO PARA EL LOGO EN EL LOGIN -->
+    <div id="pantalla-login" class="flex-1 flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-xl shadow-sm w-full max-w-md border border-purple-200">
             <div class="flex justify-center mb-4">
                 <img src="logo.png" alt="Logo PegasIA" class="h-16 object-contain" id="logo-login-placeholder">
             </div>
-            <h2 class="text-2xl font-bold mb-6 text-center text-purple-900">Acceso PegasIA</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-slate-900">Acceso PegasIA</h2>
             <form id="formulario-login" class="space-y-4">
                 <div>
-                    <label class="block text-sm font-medium mb-1 text-purple-800">Correo electrónico</label>
-                    <input type="email" id="login_email" placeholder="ana@pegasia.es" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
+                    <label class="block text-sm font-medium mb-1 text-slate-700">Correo electrónico</label>
+                    <input type="email" id="login_email" placeholder="ana@pegasia.es"
+                        class="w-full border border-purple-200 p-2.5 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition"
+                        required>
                 </div>
-                <button type="submit" id="btn-login" class="w-full bg-purple-600 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 transition shadow-md">
+                <div>
+                    <label class="block text-sm font-medium mb-1 text-slate-700">Contraseña</label>
+                    <input type="password" id="login_password" placeholder="••••••••"
+                        class="w-full border border-purple-200 p-2.5 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition"
+                        required>
+                </div>
+                <button type="submit" id="btn-login"
+                    class="w-full bg-purple-600 text-white font-semibold py-2.5 px-4 rounded-lg hover:bg-purple-700 transition shadow-sm">
                     Entrar al Despacho
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- PANTALLA PRINCIPAL (Oculta por defecto) -->
-    <div id="pantalla-app" class="hidden max-w-3xl mx-auto w-full py-8">
-        <div class="flex justify-between items-end mb-6">
+    <!-- PANTALLA PRINCIPAL -->
+    <div id="pantalla-app" class="hidden max-w-3xl mx-auto w-full py-8 px-4">
+        <div class="flex justify-between items-center mb-6 bg-white p-5 rounded-xl shadow-sm border border-purple-200">
             <div class="flex items-center gap-4">
-                <!-- HUECO PARA EL LOGO EN LA APP -->
                 <img src="logo.png" alt="Logo PegasIA" class="h-12 object-contain" id="logo-app-placeholder">
                 <div>
-                    <h1 class="text-2xl font-bold text-purple-900">Generador de Contratos</h1>
-                    <p id="nombre-despacho" class="text-purple-600 font-semibold"></p>
+                    <h1 class="text-xl font-bold text-slate-900">Generador de Contratos</h1>
+                    <p id="nombre-despacho" class="text-purple-600 font-semibold text-sm"></p>
                 </div>
             </div>
-            <button onclick="cerrarSesion()" class="text-sm text-red-500 hover:text-red-700 hover:underline font-medium transition">Cerrar sesión</button>
+            <button onclick="cerrarSesion()"
+                class="text-sm text-rose-600 hover:text-rose-800 font-semibold transition">Cerrar sesión</button>
         </div>
 
-        <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-purple-500">
+        <!-- SECCIÓN SUBIR NUEVA PLANTILLA -->
+        <div class="bg-white p-5 rounded-xl border border-purple-200 mb-6 shadow-sm">
+            <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2 text-sm uppercase tracking-wider">
+                Subir Plantilla Propia (.docx)
+            </h3>
+            <form id="form-subir-plantilla" class="flex flex-col md:flex-row gap-4 items-end">
+                <div class="flex-1 w-full">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                    <input type="text" id="nueva_plantilla_nombre"
+                        class="w-full border border-purple-200 p-2 rounded-lg focus:ring-2 focus:ring-purple-500 outline-none"
+                        required>
+                </div>
+                <div class="flex-1 w-full">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Archivo Word</label>
+                    <input type="file" id="nueva_plantilla_archivo" accept=".docx"
+                        class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100 cursor-pointer">
+                </div>
+                <button type="submit"
+                    class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-purple-700 transition shadow-sm">
+                    Guardar
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-purple-200">
             <!-- SELECTOR DE DOCUMENTO -->
-            <div class="mb-6 pb-6 border-b border-purple-100">
-                <label class="block text-sm font-bold text-purple-800 mb-2">Selecciona la plantilla a generar:</label>
-                <select id="tipo_documento" class="w-full border border-purple-200 p-3 rounded-md bg-purple-50 focus:ring-purple-500 focus:border-purple-500 font-medium text-purple-900 transition" onchange="cambiarFormulario()">
+            <div class="mb-6 pb-6 border-b border-slate-100">
+                <label class="block text-sm font-semibold text-slate-700 mb-2">Selecciona la plantilla a
+                    generar:</label>
+                <select id="tipo_documento"
+                    class="w-full border border-purple-200 p-3 rounded-lg bg-purple-50/30 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-medium text-slate-800 outline-none transition"
+                    onchange="cambiarFormulario()">
                     <option value="arrendamiento">Contrato de Arrendamiento</option>
                     <option value="nda">Acuerdo de Confidencialidad (NDA)</option>
                 </select>
@@ -58,95 +98,148 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium mb-1 text-gray-700">Ciudad</label>
-                        <input type="text" id="ciudad" value="Mairena del Alcor" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
+                        <input type="text" id="ciudad" value="Mairena del Alcor"
+                            class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500"
+                            required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-1 text-gray-700">Fecha Larga</label>
-                        <input type="text" id="fecha" value="15 de octubre de 2026" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500" required>
+                        <input type="text" id="fecha" value="15 de octubre de 2026"
+                            class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500"
+                            required>
                     </div>
                 </div>
 
                 <!-- BLOQUE 1: CAMPOS DE ARRENDAMIENTO -->
                 <div id="bloque_arrendamiento" class="space-y-6">
-                    <div class="bg-purple-50 p-4 rounded-md border border-purple-100">
+                    <div class="bg-[#d1c1ff]/25 p-4 rounded-md border border-[#b59cff]">
                         <h3 class="font-semibold text-purple-800 mb-3">Datos del Arrendador</h3>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm mb-1 text-gray-700">Nombre completo</label>
-                                <input type="text" id="arr_nombre" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                <input type="text" id="arr_nombre"
+                                    class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white">
                             </div>
                             <div>
                                 <label class="block text-sm mb-1 text-gray-700">DNI / NIF</label>
-                                <input type="text" id="arr_dni" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                <input type="text" id="arr_dni"
+                                    class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white">
                             </div>
                         </div>
                     </div>
 
                     <div class="border-t border-b border-purple-100 py-4">
                         <label class="flex items-center space-x-3 cursor-pointer">
-                            <input type="checkbox" id="hay_fiador" class="form-checkbox h-5 w-5 text-purple-600 focus:ring-purple-500" onchange="toggleFiador()">
+                            <input type="checkbox" id="hay_fiador"
+                                class="form-checkbox h-5 w-5 text-purple-600 focus:ring-purple-500"
+                                onchange="toggleFiador()">
                             <span class="font-medium text-gray-700">¿Incluir fiador solidario en el contrato?</span>
                         </label>
-                        <div id="seccion_fiador" class="hidden mt-4 bg-white p-4 rounded-md border border-purple-200 shadow-sm">
+                        <div id="seccion_fiador"
+                            class="hidden mt-4 bg-white p-4 rounded-md border border-[#b59cff] shadow-sm">
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label class="block text-sm mb-1 text-gray-700">Nombre completo Fiador</label>
-                                    <input type="text" id="fia_nombre" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                    <input type="text" id="fia_nombre"
+                                        class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm mb-1 text-gray-700">DNI / NIF Fiador</label>
-                                    <input type="text" id="fia_dni" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                    <input type="text" id="fia_dni"
+                                        class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div>
                         <label class="block text-sm font-medium mb-1 text-gray-700">Anexos (separados por comas)</label>
-                        <input type="text" id="anexos" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                        <input type="text" id="anexos"
+                            class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500">
                     </div>
                 </div>
 
                 <!-- BLOQUE 2: CAMPOS DE NDA -->
                 <div id="bloque_nda" class="space-y-6 hidden">
-                    <div class="bg-purple-50 p-4 rounded-md border border-purple-200 shadow-sm">
+                    <div class="bg-[#d1c1ff]/25 p-4 rounded-md border border-[#b59cff] shadow-sm">
                         <h3 class="font-semibold text-purple-800 mb-3">Partes Involucradas</h3>
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="block text-sm mb-1 text-gray-700">Empresa Emisora</label>
-                                <input type="text" id="nda_emisora" value="I.ATLAS" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                <input type="text" id="nda_emisora" value="I.ATLAS"
+                                    class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white">
                             </div>
                             <div>
                                 <label class="block text-sm mb-1 text-gray-700">Empresa Receptora</label>
-                                <input type="text" id="nda_receptora" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
+                                <input type="text" id="nda_receptora"
+                                    class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white">
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm mb-1 text-gray-700">Propósito del acuerdo</label>
                             <div class="flex gap-2">
-                                <input type="text" id="nda_proposito" placeholder="Ej: Evaluar una posible fusión con Microsoft" class="w-full border border-purple-200 p-2 rounded focus:ring-purple-500 focus:border-purple-500">
-                                <button type="button" onclick="mejorarConIA(event)" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition flex-shrink-0 font-bold text-sm shadow-sm flex items-center gap-1">
+                                <input type="text" id="nda_proposito"
+                                    placeholder="Ej: Evaluar una posible fusión con Microsoft"
+                                    class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white">
+                                <button type="button" onclick="mejorarConIA(event)"
+                                    class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition flex-shrink-0 font-bold text-sm shadow-sm flex items-center gap-1">
                                     ✨ Mejorar con IA
                                 </button>
                             </div>
                         </div>
-                    </div> 
-                </div> 
+                    </div>
+                </div>
 
-                <button type="submit" id="btn-generar" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded hover:bg-purple-700 transition shadow-md">
+                <!-- BLOQUE 3: CAMPOS DINÁMICOS (PLANTILLAS CUSTOM) -->
+                <div id="bloque_custom" class="space-y-6 hidden">
+                    <div
+                        class="bg-[#d1c1ff]/25 p-4 rounded-md border border-[#b59cff] shadow-sm border-l-4 border-l-purple-600">
+                        <h3 class="font-semibold text-purple-800 mb-3 flex items-center gap-2">
+                            ✨ Datos detectados en el documento
+                        </h3>
+                        <div id="contenedor_campos_custom" class="grid grid-cols-2 gap-4">
+                            <!-- Javascript inyectará aquí los inputs automáticamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="btn-generar"
+                    class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded hover:bg-purple-700 transition shadow-md">
                     Generar Documento Word
                 </button>
-                <p id="mensaje-estado" class="text-sm text-center mt-2 text-green-600 font-semibold hidden">¡Documento generado con éxito!</p>
+                <p id="mensaje-estado" class="text-sm text-center mt-2 text-green-600 font-semibold hidden">¡Documento
+                    generado con éxito!</p>
             </form>
+
+            <!-- SECCIÓN: GESTIÓN DE PLANTILLAS PROPIAS -->
+            <div class="bg-white p-5 rounded-xl border border-purple-200 mb-6 shadow-sm">
+                <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2 text-sm uppercase tracking-wider">
+                    📁 Plantillas del Despacho Guardadas
+                </h3>
+                <div class="overflow-x-auto rounded-lg border border-purple-100">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-purple-50/50 text-purple-900">
+                            <tr>
+                                <th class="p-3 font-semibold">Nombre de la Plantilla</th>
+                                <th class="p-3 font-semibold">Fecha de Subida</th>
+                                <th class="p-3 font-semibold text-right">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-plantillas-propias" class="divide-y divide-purple-50 text-slate-700 bg-white">
+                            <!-- Javascript inyectará las plantillas aquí -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
             <!-- SECCIÓN DE HISTORIAL -->
             <div class="mt-12 border-t border-purple-100 pt-8">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-xl font-bold text-purple-900">Historial del Despacho</h2>
                 </div>
-                <div class="overflow-x-auto rounded-lg border border-purple-100">
+                <div class="overflow-x-auto rounded-lg border border-[#b59cff]">
                     <table class="w-full text-left text-sm">
-                        <thead class="bg-purple-50 text-purple-800">
+                        <thead class="bg-[#d1c1ff]/25 text-purple-800">
                             <tr>
                                 <th class="p-3 font-semibold">ID</th>
                                 <th class="p-3 font-semibold">Cliente / Entidad</th>
@@ -163,36 +256,42 @@
     </div>
 
     <script>
-        // VARIABLE GLOBAL PARA ALMACENAR EL USUARIO ACTIVO
         let usuarioActivo = null;
+        window.camposActuales = [];
 
         // --- SISTEMA DE LOGIN ---
         document.getElementById('formulario-login').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btn-login');
             btn.innerText = 'Entrando...';
-            
+
             const email = document.getElementById('login_email').value;
-            
+            const password = document.getElementById('login_password').value;
+
             try {
                 const respuesta = await fetch('http://127.0.0.1:8000/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
+                    body: JSON.stringify({ email: email, password: password })
                 });
 
+                if (respuesta.status === 401) {
+                    throw new Error('Email o contraseña incorrectos');
+                }
                 if (!respuesta.ok) throw new Error('Error en login');
-                
+
                 usuarioActivo = await respuesta.json();
-                
+
                 document.getElementById('pantalla-login').classList.add('hidden');
                 document.getElementById('pantalla-app').classList.remove('hidden');
                 document.getElementById('nombre-despacho').innerText = usuarioActivo.despacho_nombre;
-                
+
                 cargarHistorial();
-                
+                cargarListaPlantillas();
+                cargarGestionPlantillas();
+
             } catch (error) {
-                alert('No se pudo conectar con el servidor.');
+                alert(error.message);
             } finally {
                 btn.innerText = 'Entrar al Despacho';
             }
@@ -201,21 +300,153 @@
         function cerrarSesion() {
             usuarioActivo = null;
             document.getElementById('login_email').value = '';
+            document.getElementById('login_password').value = '';
             document.getElementById('pantalla-app').classList.add('hidden');
             document.getElementById('pantalla-login').classList.remove('hidden');
             document.getElementById('tabla-historial').innerHTML = '';
         }
 
-        // --- LÓGICA DE FORMULARIOS ---
-        function cambiarFormulario() {
+        // --- CARGAR TABLA DE GESTIÓN DE PLANTILLAS ---
+        async function cargarGestionPlantillas() {
+            const tbody = document.getElementById('tabla-plantillas-propias');
+            if (!tbody) return;
+
+            try {
+                const respuesta = await fetch('http://127.0.0.1:8000/api/plantillas', {
+                    headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token }
+                });
+                const plantillas = await respuesta.json();
+
+                tbody.innerHTML = '';
+                if (plantillas.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="3" class="p-4 text-center text-slate-400">No hay plantillas personalizadas subidas todavía.</td></tr>`;
+                    return;
+                }
+
+                plantillas.forEach(p => {
+                    const fechaFormateada = new Date(p.fecha_subida).toLocaleDateString();
+                    const fila = document.createElement('tr');
+                    fila.className = "hover:bg-purple-50/30 transition";
+
+                    fila.innerHTML = `
+                        <td class="p-3 font-medium text-slate-800">${p.nombre}</td>
+                        <td class="p-3 text-slate-500 text-xs">${fechaFormateada}</td>
+                        <td class="p-3 text-right space-x-2">
+                            <button onclick="editarPlantilla(${p.id}, '${p.nombre}')" class="text-xs bg-purple-100 text-purple-700 px-2.5 py-1.5 rounded-md font-semibold hover:bg-purple-200 transition">Renombrar</button>
+                            <button onclick="eliminarPlantilla(${p.id})" class="text-xs bg-rose-50 text-rose-600 px-2.5 py-1.5 rounded-md font-semibold hover:bg-rose-100 transition">Eliminar</button>
+                        </td>
+                    `;
+                    tbody.appendChild(fila);
+                });
+            } catch (error) {
+                console.error("Error al cargar la gestión de plantillas", error);
+            }
+        }
+
+        async function eliminarPlantilla(id) {
+            if (!confirm("¿Estás seguro de que deseas eliminar esta plantilla del despacho?")) return;
+
+            try {
+                const respuesta = await fetch(`http://127.0.0.1:8000/api/plantillas/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token }
+                });
+
+                if (!respuesta.ok) throw new Error("No se pudo eliminar");
+
+                alert("Plantilla eliminada con éxito");
+                cargarGestionPlantillas();
+                cargarListaPlantillas(); // Actualiza el desplegable principal
+            } catch (error) {
+                alert("Error al eliminar la plantilla");
+            }
+        }
+
+        async function editarPlantilla(id, nombreActual) {
+            const nuevoNombre = prompt("Introduce el nuevo nombre para la plantilla:", nombreActual);
+            if (!nuevoNombre || nuevoNombre.trim() === "" || nuevoNombre === nombreActual) return;
+
+            try {
+                const respuesta = await fetch(`http://127.0.0.1:8000/api/plantillas/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + usuarioActivo.access_token
+                    },
+                    body: JSON.stringify({ nombre: nuevoNombre.trim() })
+                });
+
+                if (!respuesta.ok) throw new Error("No se pudo actualizar");
+
+                alert("Plantilla actualizada con éxito");
+                cargarGestionPlantillas();
+                cargarListaPlantillas(); // Actualiza el desplegable principal
+            } catch (error) {
+                alert("Error al actualizar la plantilla");
+            }
+        }
+
+        // --- CAMBIAR FORMULARIO Y ESCÁNER DE CAMPOS ---
+        async function cambiarFormulario() {
             const tipo = document.getElementById('tipo_documento').value;
+
             document.getElementById('bloque_arrendamiento').classList.add('hidden');
             document.getElementById('bloque_nda').classList.add('hidden');
-            
-            if(tipo === 'arrendamiento') {
+            document.getElementById('bloque_custom').classList.add('hidden');
+
+            if (tipo === 'arrendamiento') {
                 document.getElementById('bloque_arrendamiento').classList.remove('hidden');
             } else if (tipo === 'nda') {
                 document.getElementById('bloque_nda').classList.remove('hidden');
+            } else if (tipo.startsWith('custom_')) {
+                const plantillaId = tipo.split('_')[1];
+                document.getElementById('bloque_custom').classList.remove('hidden');
+                const contenedor = document.getElementById('contenedor_campos_custom');
+                contenedor.innerHTML = '<p class="text-sm text-purple-600 font-mono col-span-2">Analizando documento...</p>';
+
+                try {
+                    const respuesta = await fetch(`http://127.0.0.1:8000/api/plantillas/${plantillaId}/campos`, {
+                        headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token }
+                    });
+                    const datos = await respuesta.json();
+                    window.camposActuales = datos.campos;
+
+                    contenedor.innerHTML = '';
+                    if (datos.campos.length === 0) {
+                        contenedor.innerHTML = '<p class="text-sm text-gray-500 col-span-2">No se detectaron variables en este documento.</p>';
+                    } else {
+                        datos.campos.forEach(campo => {
+                            const div = document.createElement('div');
+                            const nombreCampo = campo.nombre || campo;
+                            const tipoCampo = campo.tipo || 'text';
+                            const etiqueta = nombreCampo.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                            if (tipoCampo === 'boolean') {
+                                div.className = 'col-span-2 flex items-center mt-2';
+                                div.innerHTML = `
+                                    <label class="flex items-center space-x-2 text-sm font-medium text-purple-800 cursor-pointer">
+                                        <input type="checkbox" id="campo_${nombreCampo}" class="form-checkbox h-5 w-5 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
+                                        <span>¿${etiqueta}?</span>
+                                    </label>
+                                `;
+                            } else if (tipoCampo === 'list') {
+                                div.className = 'col-span-2';
+                                div.innerHTML = `
+                                    <label class="block text-sm font-medium mb-1 text-purple-800">${etiqueta} (separado por comas)</label>
+                                    <input type="text" id="campo_${nombreCampo}" placeholder="Ej: Elemento 1, Elemento 2" class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 bg-white">
+                                `;
+                            } else {
+                                div.innerHTML = `
+                                    <label class="block text-sm mb-1 text-gray-700 font-medium">${etiqueta}</label>
+                                    <input type="text" id="campo_${nombreCampo}" class="w-full border border-[#b59cff] p-2 rounded focus:ring-purple-500 focus:border-purple-500 bg-white" placeholder="Escribe aquí..." required>
+                                `;
+                            }
+                            contenedor.appendChild(div);
+                        });
+                    }
+                } catch (error) {
+                    contenedor.innerHTML = '<p class="text-sm text-red-500 col-span-2">Error al analizar el archivo Word.</p>';
+                }
             }
         }
 
@@ -224,104 +455,24 @@
             document.getElementById('hay_fiador').checked ? seccion.classList.remove('hidden') : seccion.classList.add('hidden');
         }
 
-        // --- GENERAR CONTRATO ---
-        document.getElementById('formulario-contrato').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btn-generar');
-            btn.innerText = 'Generando...';
-            btn.disabled = true;
-
-            const tipo = document.getElementById('tipo_documento').value;
-            let payload = {};
-            let endpoint = '';
-            let nombreArchivo = '';
-
-            if (tipo === 'arrendamiento') {
-                endpoint = '/api/generar/arrendamiento';
-                nombreArchivo = `Contrato_${document.getElementById('arr_nombre').value.replace(' ', '_')}.docx`;
-                const anexosString = document.getElementById('anexos').value;
-                payload = {
-                    ciudad: document.getElementById('ciudad').value,
-                    fecha_larga: document.getElementById('fecha').value,
-                    arrendador: {
-                        nombre: document.getElementById('arr_nombre').value,
-                        dni: document.getElementById('arr_dni').value
-                    },
-                    hay_fiador: document.getElementById('hay_fiador').checked,
-                    fiador: document.getElementById('hay_fiador').checked ? {
-                        nombre: document.getElementById('fia_nombre').value,
-                        dni: document.getElementById('fia_dni').value
-                    } : null,
-                    anexos: anexosString ? anexosString.split(',').map(a => a.trim()) : []
-                };
-            } else if (tipo === 'nda') {
-                endpoint = '/api/generar/confidencialidad';
-                nombreArchivo = `NDA_${document.getElementById('nda_receptora').value.replace(' ', '_')}.docx`;
-                payload = {
-                    ciudad: document.getElementById('ciudad').value,
-                    fecha_larga: document.getElementById('fecha').value,
-                    empresa_emisora: document.getElementById('nda_emisora').value,
-                    empresa_receptora: document.getElementById('nda_receptora').value,
-                    proposito: document.getElementById('nda_proposito').value
-                };
-            }
-
-            try {
-                // AÑADIMOS EL HEADER usuario-id
-                const respuesta = await fetch(`http://127.0.0.1:8000${endpoint}`, {
-                    method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'usuario-id': usuarioActivo.usuario_id.toString()
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!respuesta.ok) throw new Error('Error al generar el documento');
-
-                const blob = await respuesta.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = nombreArchivo;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-                
-                document.getElementById('mensaje-estado').classList.remove('hidden');
-                setTimeout(() => document.getElementById('mensaje-estado').classList.add('hidden'), 3000);
-                
-                cargarHistorial(); 
-                
-            } catch (error) {
-                alert('Hubo un error de conexión.');
-                console.error(error);
-            } finally {
-                btn.innerText = 'Generar Documento Word';
-                btn.disabled = false;
-            }
-        });
-
         // --- CARGAR HISTORIAL ---
         async function cargarHistorial() {
             const tbody = document.getElementById('tabla-historial');
             try {
-                // AÑADIMOS EL HEADER usuario-id
                 const respuesta = await fetch('http://127.0.0.1:8000/api/documentos', {
                     headers: {
-                        'usuario-id': usuarioActivo.usuario_id.toString()
+                        'Authorization': 'Bearer ' + usuarioActivo.access_token
                     }
                 });
                 const documentos = await respuesta.json();
-                
-                tbody.innerHTML = ''; 
+
+                tbody.innerHTML = '';
                 documentos.forEach(doc => {
                     const fila = document.createElement('tr');
-                    fila.className = "hover:bg-purple-50 transition border-b border-purple-50";
-                    
-                    // Modificamos el botón de descarga para enviar el header mediante fetch
+                    fila.className = "hover:bg-[#d1c1ff]/20 transition border-b border-purple-50";
+
                     fila.innerHTML = `
-                        <td class="p-3 font-mono text-xs text-purple-400">#${doc.id}</td>
+                        <td class="p-3 font-mono text-xs text-purple-500">#${doc.id}</td>
                         <td class="p-3 font-medium text-gray-800">${doc.cliente}</td>
                         <td class="p-3 font-semibold text-purple-700">${doc.tipo}</td>
                         <td class="p-3 text-gray-500">${doc.fecha}</td>
@@ -340,16 +491,16 @@
                 console.error(error);
             }
         }
-        
-       // --- DESCARGAR ARCHIVO DESDE HISTORIAL (CON HEADER) ---
+
+        // --- DESCARGAR ARCHIVO DESDE HISTORIAL ---
         async function descargarDocumento(docId) {
             try {
                 const respuesta = await fetch(`http://127.0.0.1:8000/api/documentos/${docId}/descargar`, {
-                    headers: { 'usuario-id': usuarioActivo.usuario_id.toString() }
+                    headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token }
                 });
-                
+
                 if (!respuesta.ok) throw new Error('No se pudo descargar el archivo');
-                
+
                 const contentDisposition = respuesta.headers.get('content-disposition');
                 let fileName = `documento_${docId}.docx`;
                 if (contentDisposition && contentDisposition.includes('filename=')) {
@@ -364,7 +515,7 @@
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
-            } catch(error) {
+            } catch (error) {
                 alert("Error al descargar el archivo");
             }
         }
@@ -373,7 +524,7 @@
         async function mejorarConIA(evento) {
             const inputProposito = document.getElementById('nda_proposito');
             const textoBreve = inputProposito.value;
-            
+
             if (!textoBreve) {
                 alert("Escribe una idea breve primero (ej: 'fusión con Microsoft') para que la IA la redacte.");
                 return;
@@ -387,18 +538,18 @@
             try {
                 const respuesta = await fetch('http://127.0.0.1:8000/api/ia/redactar', {
                     method: 'POST',
-                    headers: { 
+                    headers: {
                         'Content-Type': 'application/json',
-                        'usuario-id': usuarioActivo.usuario_id.toString()
+                        'Authorization': 'Bearer ' + usuarioActivo.access_token
                     },
                     body: JSON.stringify({ texto_breve: textoBreve })
                 });
 
                 if (!respuesta.ok) throw new Error('Error al conectar con el motor de IA');
-                
+
                 const datos = await respuesta.json();
                 inputProposito.value = datos.texto_generado;
-                
+
             } catch (error) {
                 alert("Hubo un problema al generar el texto jurídico. Comprueba tu clave de API.");
                 console.error(error);
@@ -407,6 +558,189 @@
                 btn.disabled = false;
             }
         }
+
+        // --- SUBIR PLANTILLA CUSTOM ---
+        document.getElementById('form-subir-plantilla').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerText = 'Subiendo...';
+
+            const nombre = document.getElementById('nueva_plantilla_nombre').value;
+            const archivoInput = document.getElementById('nueva_plantilla_archivo');
+
+            const formData = new FormData();
+            formData.append("nombre", nombre);
+            formData.append("archivo", archivoInput.files[0]);
+
+            try {
+                const respuesta = await fetch('http://127.0.0.1:8000/api/plantillas/subir', {
+                    method: 'POST',
+                    headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token },
+                    body: formData
+                });
+
+                if (!respuesta.ok) throw new Error('Error al subir');
+
+                alert('¡Plantilla subida con éxito!');
+                e.target.reset();
+                cargarListaPlantillas();
+
+            } catch (error) {
+                alert('No se pudo subir la plantilla.');
+            } finally {
+                btn.innerText = 'Guardar';
+            }
+        });
+
+        // --- GENERAR CONTRATO (UNIFICADO PARA ESTÁNDAR Y CUSTOM) ---
+        document.getElementById('formulario-contrato').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btn-generar');
+            const textoOriginal = btn.innerText;
+            btn.innerText = 'Generando...';
+            btn.disabled = true;
+
+            const tipo = document.getElementById('tipo_documento').value;
+
+            try {
+                if (tipo.startsWith('custom_')) {
+                    const plantillaId = tipo.split('_')[1];
+                    const datos = {};
+
+                    if (window.camposActuales) {
+                        window.camposActuales.forEach(campo => {
+                            const nombreCampo = campo.nombre || campo;
+                            const tipoCampo = campo.tipo || 'text';
+                            const elemento = document.getElementById(`campo_${nombreCampo}`);
+                            if (!elemento) return;
+
+                            if (tipoCampo === 'boolean') {
+                                datos[nombreCampo] = elemento.checked;
+                            } else if (tipoCampo === 'list') {
+                                datos[nombreCampo] = elemento.value.split(',').map(item => item.trim()).filter(i => i);
+                            } else {
+                                datos[nombreCampo] = elemento.value;
+                            }
+                        });
+                    }
+
+                    const respuesta = await fetch(`http://127.0.0.1:8000/api/generar/custom/${plantillaId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + usuarioActivo.access_token
+                        },
+                        body: JSON.stringify({ datos: datos })
+                    });
+
+                    if (!respuesta.ok) throw new Error('Error al generar documento personalizado');
+
+                    const blob = await respuesta.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Documento_PegasIA_Custom.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+
+                    cargarHistorial();
+
+                } else {
+                    let payload = {};
+                    let endpoint = '';
+                    let nombreArchivo = '';
+
+                    if (tipo === 'arrendamiento') {
+                        endpoint = '/api/generar/arrendamiento';
+                        nombreArchivo = `Contrato_${document.getElementById('arr_nombre').value.replace(/ /g, '_')}.docx`;
+                        const anexosString = document.getElementById('anexos').value;
+                        payload = {
+                            ciudad: document.getElementById('ciudad').value,
+                            fecha_larga: document.getElementById('fecha').value,
+                            arrendador: {
+                                nombre: document.getElementById('arr_nombre').value,
+                                dni: document.getElementById('arr_dni').value
+                            },
+                            hay_fiador: document.getElementById('hay_fiador').checked,
+                            fiador: document.getElementById('hay_fiador').checked ? {
+                                nombre: document.getElementById('fia_nombre').value,
+                                dni: document.getElementById('fia_dni').value
+                            } : null,
+                            anexos: anexosString ? anexosString.split(',').map(a => a.trim()) : []
+                        };
+                    } else if (tipo === 'nda') {
+                        endpoint = '/api/generar/confidencialidad';
+                        nombreArchivo = `NDA_${document.getElementById('nda_receptora').value.replace(/ /g, '_')}.docx`;
+                        payload = {
+                            ciudad: document.getElementById('ciudad').value,
+                            fecha_larga: document.getElementById('fecha').value,
+                            empresa_emisora: document.getElementById('nda_emisora').value,
+                            empresa_receptora: document.getElementById('nda_receptora').value,
+                            proposito: document.getElementById('nda_proposito').value
+                        };
+                    }
+
+                    const respuesta = await fetch(`http://127.0.0.1:8000${endpoint}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + usuarioActivo.access_token
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!respuesta.ok) throw new Error('Error al generar el documento estándar');
+
+                    const blob = await respuesta.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = nombreArchivo;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+
+                    cargarHistorial();
+                }
+
+                document.getElementById('mensaje-estado').classList.remove('hidden');
+                setTimeout(() => document.getElementById('mensaje-estado').classList.add('hidden'), 3000);
+
+            } catch (error) {
+                alert('Hubo un error de conexión o al generar: ' + error.message);
+                console.error(error);
+            } finally {
+                btn.innerText = textoOriginal;
+                btn.disabled = false;
+            }
+        });
+
+        // --- CARGAR PLANTILLAS EN EL DESPLEGABLE ---
+        async function cargarListaPlantillas() {
+            try {
+                const respuesta = await fetch('http://127.0.0.1:8000/api/plantillas', {
+                    headers: { 'Authorization': 'Bearer ' + usuarioActivo.access_token }
+                });
+                const plantillas = await respuesta.json();
+
+                const select = document.getElementById('tipo_documento');
+                select.innerHTML = `
+                    <option value="arrendamiento">Contrato de Arrendamiento (Estándar)</option>
+                    <option value="nda">Acuerdo de Confidencialidad (Estándar)</option>
+                `;
+
+                plantillas.forEach(p => {
+                    const opcion = document.createElement('option');
+                    opcion.value = `custom_${p.id}`;
+                    opcion.innerText = `⭐ ${p.nombre} (Propia)`;
+                    select.appendChild(opcion);
+                });
+            } catch (error) {
+                console.error("Error cargando plantillas custom", error);
+            }
+        }
     </script>
 </body>
+
 </html>
